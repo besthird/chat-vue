@@ -5,6 +5,9 @@
 </template>
 
 <style>
+body {
+  background: red;
+}
 #app {
   margin: 20px auto;
   width: 800px;

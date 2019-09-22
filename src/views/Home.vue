@@ -1,7 +1,13 @@
 <template>
-  <div class="sidebar">
-    <Card />
-    <list />
+  <div>
+    <div class="sidebar">
+      <Card />
+      <list />
+    </div>
+    <div class="main">
+      <message />
+      <Send />
+    </div>
   </div>
 </template>
 
@@ -9,12 +15,16 @@
 // @ is an alias to /src
 import Card from "@/components/Card.vue";
 import List from "@/components/List.vue";
+import Message from "@/components/Message.vue";
+import Send from "@/components/Send.vue";
 
 export default {
   name: "home",
   components: {
     Card,
-    List
+    List,
+    Message,
+    Send
   }
 };
 </script>
@@ -27,13 +37,17 @@ export default {
 .sidebar {
   float: left;
   width: 200px;
+  height: 600px;
   color: #f4f4f4;
   background-color: #2e3238;
 }
 .main {
+  height: 600px;
   position: relative;
   overflow: hidden;
-  background-color: #eee;
+  display: flex;
+  
+  flex-direction: column;
 }
 .text {
   position: absolute;
@@ -42,6 +56,10 @@ export default {
   left: 0;
 }
 .message {
-  height: ~"calc(100% - 160px)";
+  background-color: #eee;
+  flex: 1;
+}
+.send {
+  height: 160px;
 }
 </style>

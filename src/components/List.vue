@@ -1,9 +1,9 @@
 <template>
   <div class="list">
-    <ul>
-      <li v-for="(item, index) in sessions" @click="selectSession(item.id)" v-bind:key="index">
-        <img class="avatar" width="30" height="30" :alt="item.user.name" src="../assets/1.jpg" />
-        <p class="name">{{item.user.name}}</p>
+    <ul v-if="user">
+      <li v-for="(item, index) in user" @click="selectSession(item.id)" v-bind:key="index">
+        <img class="avatar" width="30" height="30" :alt="item.name" src="../assets/1.jpg" />
+        <p class="name">{{item.name}}</p>
       </li>
     </ul>
   </div>
@@ -15,18 +15,14 @@ export default {
   data() {
     return {
       // 会话列表
-      sessions: [
+      user: [
         {
-          id: 1,
-          user: {
-            name: "示例介绍",
-          },
+          name: "政策",
+          token: 1
         },
         {
-          id: 2,
-          user: {
-            name: "webpack",
-          },
+          name: "小北",
+          token: 2
         }
       ]
     };
