@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <ul v-if="users">
-      <li v-for="(item, index) in users" @click="selectSession(item.id)" v-bind:key="index">
+      <li v-for="(item, index) in users" @click="selectSession(item)" v-bind:key="index" :class="{ active: user && item.id === user.id }">
         <img class="avatar" width="30" height="30" :alt="item.name" src="../assets/1.jpg" />
         <p class="name">{{item.name}}</p>
       </li>
@@ -15,7 +15,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "list",
   computed: {
-    ...mapGetters(["users"])
+    ...mapGetters(["users", "user"])
   },
   data() {
     return {
@@ -27,12 +27,13 @@ export default {
   props: {
   },
   methods: {
-    selectSession() {}
+    selectSession(item) {
+      this.$store.commit('SET_USER_ID', item)
+    }
   },
   watch: {
-    users (a, b) {
-      console.log(a)
-      console.log(b)
+    users (newUser, oldUser) {
+      // console.log(newUser)
     }
   }
 };
@@ -49,7 +50,7 @@ export default {
 .list li:hover {
   background-color: rgba(255, 255, 255, 0.03);
 }
-.list li:active {
+.list .active {
   background-color: rgba(255, 255, 255, 0.1);
 }
 

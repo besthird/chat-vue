@@ -18,6 +18,7 @@ export default {
   methods: {
     onKeyup(e) {
       if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
+        this.$emit('sendWs', this.content)
         this.content = "";
       }
     }

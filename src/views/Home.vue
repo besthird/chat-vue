@@ -6,7 +6,7 @@
     </div>
     <div class="main">
       <message />
-      <Send />
+      <Send @sendWs="send" />
     </div>
   </div>
 </template>
@@ -18,18 +18,39 @@ import List from "@/components/List.vue";
 import Message from "@/components/Message.vue";
 import Send from "@/components/Send.vue";
 import { ChatWebSocket } from '@/util/ws'
-const ws = ChatWebSocket.getInstance(2)
+import { mapGetters } from "vuex";
 
 export default {
   name: "home",
+  data() {
+    return {
+      userVal: {}
+    }
+  },
   components: {
     Card,
     List,
     Message,
     Send
   },
+  computed: {
+    ...mapGetters(["messages", "user"])
+  },
   mounted() {
-    // console.log(ChatWebSocket)
+    if (this.$route.query.token) {
+      let ws = ChatWebSocket.getInstance(this.$route.query.token)
+    }
+  },
+  methods: {
+    send(val) {
+      let ws = ChatWebSocket.getInstance(this.$route.query.token).send(val, this.userVal)
+      
+    }
+  },
+  watch: {
+    user(val) {
+      this.userVal = val
+    }
   }
 };
 </script>

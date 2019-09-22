@@ -1,14 +1,16 @@
 <template>
   <div class="message" ref="message">
     <ul v-if="messages">
-      <li v-for="(item, index) in messages" v-bind:key="index">
-        <p class="time">
-          <span>{{item.time}}</span>
-        </p>
-        <div class="main" :class="{ self: item.self }">
-          <img v-if="!item.self" class="avatar" width="30" height="30" src="../assets/1.jpg" />
-          <div class="text">{{ item.content }}</div>
-          <img v-if="item.self" class="avatar" width="30" height="30" src="../assets/1.jpg" />
+      <li v-if="messages[user.id]">
+        <div v-for="(val, k) in messages[user.id]" v-bind:key="k">
+          <p class="time">
+            <span>{{val.time}}</span>
+          </p>
+          <div class="main" :class="{ self: val.self }">
+            <img v-if="!val.self" class="avatar" width="30" height="30" src="../assets/1.jpg" />
+            <div class="text">{{ val.content }}</div>
+            <img v-if="val.self" class="avatar" width="30" height="30" src="../assets/1.jpg" />
+          </div>
         </div>
       </li>
     </ul>
@@ -16,23 +18,15 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  name: "message",
+  name: "cpmponents-message",
+  computed: {
+    ...mapGetters(["messages", "user"])
+  },
+  // 会话列表
   data() {
-    return {
-      // 会话列表
-      messages: [
-        {
-          content:
-            "你是笨蛋",
-          time: '2019',
-          self: true
-        }, {
-          content: "你是傻瓜",
-          time: '2019'
-        }
-      ]
-    };
+    return {};
   },
   props: {
     msg: String
@@ -40,9 +34,21 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
-    })
+    });
   },
-  methods: {
+  methods: {},
+  watch: {
+    messages(val) {
+      console.log(val)
+      this.$nextTick(() => {
+        this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
+      });
+    },
+    user() {
+      this.$nextTick(() => {
+        this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
+      });
+    }
   }
 };
 </script>
@@ -90,14 +96,7 @@ export default {
   background-color: #fafafa;
   border-radius: 4px;
 }
-.message .text:before {
-  content: " ";
-  position: absolute;
-  top: 9px;
-  right: 100%;
-  border: 6px solid transparent;
-  border-right-color: #fafafa;
-}
+
 .message .self {
   text-align: right;
   justify-content: flex-end;

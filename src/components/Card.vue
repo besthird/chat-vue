@@ -2,7 +2,7 @@
   <div class="card">
     <header>
       <img class="avatar" width="40" height="40" src="../assets/1.jpg" />
-      <p class="name">小林</p>
+      <p class="name">北瑟</p>
     </header>
     <footer>
       <input class="search" type="text" placeholder="search user..." />
