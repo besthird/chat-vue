@@ -1,5 +1,5 @@
 <template>
-  <div class="message" ref="message">
+  <div class="message" ref="message" v-scroll-bottom="messages" >
     <ul v-if="messages">
       <li v-if="messages[user.id]">
         <div v-for="(val, k) in messages[user.id]" v-bind:key="k">
@@ -49,6 +49,14 @@ export default {
         this.$refs.message.scrollTop = this.$refs.message.scrollHeight;
       });
     }
+  },
+  directives: {
+      // 发送消息后滚动到底部
+      'scroll-bottom' (el,binding,vnode) {
+        global.vue.$nextTick(() => {
+          el.scrollTop = el.scrollHeight
+        })
+      }
   }
 };
 </script>
