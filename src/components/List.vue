@@ -1,7 +1,7 @@
 <template>
   <div class="list">
-    <ul v-if="user">
-      <li v-for="(item, index) in user" @click="selectSession(item.id)" v-bind:key="index">
+    <ul v-if="users">
+      <li v-for="(item, index) in users" @click="selectSession(item.id)" v-bind:key="index">
         <img class="avatar" width="30" height="30" :alt="item.name" src="../assets/1.jpg" />
         <p class="name">{{item.name}}</p>
       </li>
@@ -10,28 +10,30 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "list",
+  computed: {
+    ...mapGetters(["users"])
+  },
   data() {
     return {
-      // 会话列表
-      user: [
-        {
-          name: "政策",
-          token: 1
-        },
-        {
-          name: "小北",
-          token: 2
-        }
-      ]
+      
     };
   },
+  mounted() {
+  },
   props: {
-    msg: String
   },
   methods: {
     selectSession() {}
+  },
+  watch: {
+    users (a, b) {
+      console.log(a)
+      console.log(b)
+    }
   }
 };
 </script>

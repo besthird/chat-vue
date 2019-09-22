@@ -17,6 +17,8 @@ import Card from "@/components/Card.vue";
 import List from "@/components/List.vue";
 import Message from "@/components/Message.vue";
 import Send from "@/components/Send.vue";
+import { ChatWebSocket } from '@/util/ws'
+const ws = ChatWebSocket.getInstance(2)
 
 export default {
   name: "home",
@@ -25,6 +27,9 @@ export default {
     List,
     Message,
     Send
+  },
+  mounted() {
+    // console.log(ChatWebSocket)
   }
 };
 </script>
